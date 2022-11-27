@@ -4,7 +4,7 @@ def main():
     logger.init()
     sumaApp = gui.App()
     logger.log("App: SUMA opened")
-    sumaApp.geometry("1280x720")
+    sumaApp.geometry("1280x700")
     sumaApp.wm_resizable(False, False)
     sumaApp.mainloop()
     logger.log('App: SUMA closed')

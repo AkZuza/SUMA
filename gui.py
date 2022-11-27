@@ -4,7 +4,11 @@ from tkinter import messagebox
 import sql_interface as si
 from admin import AdminPage
 from teacher import TeacherPage
+from student import CreateStudentPage
+from absentee import AbsenteePage
+from marks import DisplayStudentMarksPage
 from common import loginheadingfont
+
     
 
 class App(tk.Tk):
@@ -25,13 +29,13 @@ class App(tk.Tk):
 
         self.frames = {}
 
-        for F in (LoginPage,AdminPage, TeacherPage):
+        for F in (DisplayStudentMarksPage, AbsenteePage, LoginPage,AdminPage, TeacherPage, CreateStudentPage):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row = 0, column=0, sticky="nsew")
 
         # login page open karo
-        self.current_frame = TeacherPage
+        self.current_frame = DisplayStudentMarksPage
         self.show_frame(self.current_frame)
     
     # shows new frame

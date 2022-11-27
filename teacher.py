@@ -12,7 +12,12 @@ def generate_report_student(id):
 
 
 
+class CreateTeacherPage(tk.Frame):
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        back_and_home(self, controller)
 
+        
 
 
 class TeacherPage(tk.Frame):
