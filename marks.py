@@ -65,7 +65,7 @@ class AddStudentMarkPage(tk.Frame):
         self.marks = {}
         for sub in subjects:
             i = sub[0]
-            tk.Label(self, font=labelfont, text=i).place(anchor='ne', relx=0.2, rely = rely)
+            tk.Label(self, font=labelfont, text=i, width=len("Computer Science")).place(anchor='ne', relx=0.2, rely = rely)
             self.marks[i] = tk.Entry(self, font=labelfont, width=5)
             self.marks[i].place(anchor='nw', relx=0.21, rely=rely)
             rely += 0.06
