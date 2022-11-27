@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 
 from common import back_and_home
+import student
 
 class AdminPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -14,15 +15,15 @@ class AdminPage(tk.Frame):
         menu_options = [
             'Student Details', 'Class Details', 'Teacher Details'
         ]
-        clicked = tk.StringVar(self)
-        clicked.set(menu_options[0])
+        self.clicked = tk.StringVar(self)
+        self.clicked.set(menu_options[0])
 
-        drop = tk.OptionMenu(self, clicked, *menu_options)
+        drop = tk.OptionMenu(self, self.clicked, *menu_options)
         drop.place(anchor='center', relx=0.1, rely=0.1, width=160)
 
 
         # buttons
-        AddButton = tk.Button(self, text="Add", width=6, command= lambda : self.add_button())
+        AddButton = tk.Button(self, text="Add", width=6, command= lambda : self.add_button(controller))
         AddButton.place(anchor='center', relx=0.2, rely=0.1)
         EditButton = tk.Button(self, text="Edit", width=6)
         EditButton.place(anchor='center', relx=0.25, rely=0.1)
@@ -30,5 +31,10 @@ class AdminPage(tk.Frame):
         DelButton.place(anchor='center', relx=0.30, rely=0.1)
 
 
-    def add_button(self):
-        messagebox.showinfo('YAYYYY ADDING')
+        # the list view
+        self.list_to_view = []
+
+
+    def add_button(self, controller):
+        if self.clicked.get() == "Student Details":
+            controller.show_frame(student.CreateStudentPage)

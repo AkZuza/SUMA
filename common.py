@@ -10,4 +10,4 @@ def back_and_home(frame, controller):
     home.place(anchor="se", relx=0.95, rely=0.99)
 
 def info_box(text):
-    messagebox.showinfo(title="Suma", text=text)
+    messagebox.showinfo(title="Suma", message=text)

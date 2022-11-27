@@ -3,7 +3,7 @@ from tkinter import messagebox
 
 import sql_interface as si
 from admin import AdminPage
-from teacher import TeacherPage
+from teacher import TeacherPage, CreateTeacherPage
 from student import CreateStudentPage
 from absentee import AbsenteePage
 from marks import DisplayStudentMarksPage
@@ -29,13 +29,13 @@ class App(tk.Tk):
 
         self.frames = {}
 
-        for F in (DisplayStudentMarksPage, AbsenteePage, LoginPage,AdminPage, TeacherPage, CreateStudentPage):
+        for F in (DisplayStudentMarksPage, AbsenteePage, LoginPage,AdminPage, TeacherPage, CreateStudentPage, CreateTeacherPage):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row = 0, column=0, sticky="nsew")
 
         # login page open karo
-        self.current_frame = CreateStudentPage
+        self.current_frame = CreateTeacherPage
         self.show_frame(self.current_frame)
     
     # shows new frame

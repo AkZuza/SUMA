@@ -5,6 +5,11 @@ def fetch_student(id):
     s = si.cursor.fetchone()
     return s
 
+def fetch_all():
+    si.cursor.execute(f'select * from Student')
+    s = si.cursor.fetchall()
+    return s
+
 def update(s):
     SID=s[0]
     SNAME=s[1]
@@ -42,7 +47,8 @@ def add_student(s):
         print('Student already exists with the same admission number')
         return "Exists"
     
-    q="insert into Student values({},'{}',{},'{}','{}',{},'{}',{}".format(SID,SNAME,CID,GENDER,ADD,CONNO,MID,EMER)
+    q="insert into Student values({},'{}',{},'{}','{}',{},'{}',{})".format(SID,SNAME,CID,GENDER,ADD,CONNO,MID,EMER)
     si.cursor.execute(q)
+    si.connection.commit()
     return "Created"
 

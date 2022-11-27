@@ -1,3 +1,4 @@
+import student_sql
 import sql_interface as si
 import common
 import tkinter as tk
@@ -5,6 +6,7 @@ import tkinter as tk
 
 class CreateStudentPage(tk.Frame):
     def __init__(self, parent, controller):
+        self.c = controller
         tk.Frame.__init__(self, parent)
         common.back_and_home(self, controller)
 
@@ -20,8 +22,8 @@ class CreateStudentPage(tk.Frame):
         self.name.place(anchor="nw", relx=0.16, rely=0.153)
 
         tk.Label(self, text="Class", font=labelfont).place(anchor="ne", relx=0.14, rely=0.2)
-        self.classid = tk.Entry(self, font=labelfont)
-        self.classid.place(anchor="nw", relx=0.16, rely=0.204)
+        self.classname = tk.Entry(self, font=labelfont)
+        self.classname.place(anchor="nw", relx=0.16, rely=0.204)
 
         tk.Label(self, text="Gender", font=labelfont).place(anchor="ne", relx=0.14, rely=0.25)
         menu_options_gender = [
@@ -49,8 +51,29 @@ class CreateStudentPage(tk.Frame):
         self.emerg = tk.Entry(self, font=labelfont)
         self.emerg.place(anchor="nw", relx=0.16, rely=0.459)
 
+        tk.Button(self, text='Add Student', font=labelfont, command= lambda : self.add_student()).place(anchor='ne', relx= 0.14, rely=0.523)
+
     def add_student(self):
-        pass
+        sid = int(self.admnno.get())
+        sname = self.name.get()
+        classname = self.classname.get()
+        classid = 1234
+        gender = self.gender_clicked.get()
+        address = self.address.get()
+        contact = int(self.contact.get())
+        email = self.email.get()
+        eme = int(self.emerg.get())
+
+        s = (sid, sname, classid, gender, address, contact, email, eme)
+        code = student_sql.add_student(s)
+        if code == "Exists":
+            common.info_box('Student with same admission number exists')
+        else:
+            common.info_box('Added Student')
+            self.c.back_frame()
+            
+
+
     
 
 
