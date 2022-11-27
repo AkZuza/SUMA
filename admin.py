@@ -90,7 +90,7 @@ class AdminPage(tk.Frame):
             CONNO=s[5]
             MID=s[6]
             EMER=s[7]
-            classname = 'a class' #class_sql.fetch(CID)[1]
+            classname = class_sql.fetch(CID)[1]
             self.tree.insert('', 'end', text=str(i), values=(SID, SNAME, classname, GENDER, CONNO, MID, EMER))
             i +=1
 

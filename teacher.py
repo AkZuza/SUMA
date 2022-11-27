@@ -235,7 +235,7 @@ class TeacherPage(tk.Frame):
             i += 1
 
     def load_class(self):
-        self.classes = []
+        self.classes = ['']
         self.tid = int(common.logged_in_user)
         for i in class_sql.fetch_all():
             if i[3] == self.tid:

@@ -1,20 +1,23 @@
 import mysql.connector as mys
 import sql_interface as si
-si.init()
 
-connection = mys.connect(user="root", passwd="root", host="localhost")
-cursor = connection.cursor()
+def insert_Data():
+    si.init()
 
-cursor.execute('insert into course_master values(10, "CS")')
-cursor.execute('insert into course_master values(11, "Bio")')
-cursor.execute('insert into course_details values(10, "Maths")')
-cursor.execute('insert into course_details values(10, "English")')
-cursor.execute('insert into course_details values(10, "Chemistry")')
-cursor.execute('insert into course_details values(10, "Physics")')
-cursor.execute('insert into course_details values(10, "Computer Science")')
+    si.cursor.execute('insert into course_master values(10, "CS")')
+    si.cursor.execute('insert into course_master values(11, "Bio")')
+    si.cursor.execute('insert into course_details values(10, "Maths")')
+    si.cursor.execute('insert into course_details values(10, "English")')
+    si.cursor.execute('insert into course_details values(10, "Chemistry")')
+    si.cursor.execute('insert into course_details values(10, "Physics")')
+    si.cursor.execute('insert into course_details values(10, "Computer Science")')
 
-cursor.execute('insert into course_details values(11, "Maths")')
-cursor.execute('insert into course_details values(11, "English")')
-cursor.execute('insert into course_details values(11, "Chemistry")')
-cursor.execute('insert into course_details values(11, "Physics")')
-cursor.execute('insert into course_details values(11, "Biology")')
+    si.cursor.execute('insert into course_details values(11, "Maths")')
+    si.cursor.execute('insert into course_details values(11, "English")')
+    si.cursor.execute('insert into course_details values(11, "Chemistry")')
+    si.cursor.execute('insert into course_details values(11, "Physics")')
+    si.cursor.execute('insert into course_details values(11, "Biology")')
+
+    si.connection.commit()
+
+insert_Data()

@@ -47,6 +47,12 @@ class CreateClassPage(tk.Frame):
         teacherid = common.find_id(teacher_sql.fetch_all(), teacher)
         courseid = common.find_id(course_sql.fetch_m_all(), course)
 
+        if courseid == -1:
+            common.info_box('Such a course does not exist')
+
+        if teacherid == -1:
+            common.info_box('Such a teacher does not exist')
+
         t = (tid, tname, courseid, teacherid)
         code = class_sql.add(t)
         if code == "Exists":

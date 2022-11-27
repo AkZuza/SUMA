@@ -28,7 +28,7 @@ class CreateStudentPage(tk.Frame):
 
         tk.Label(self, text="Gender", font=labelfont).place(anchor="ne", relx=0.14, rely=0.261)
         menu_options_gender = [
-            'Male', 'Female', 'LGBTQ+'
+            'Male', 'Female'
         ]
         self.gender_clicked = tk.StringVar(self)
         self.gender_clicked.set(menu_options_gender[0])

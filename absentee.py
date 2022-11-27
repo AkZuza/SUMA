@@ -10,7 +10,7 @@ class AbsenteePage(tk.Frame):
 
         tk.Label(self, text="Student: ", font=("Arial", 17)).place(anchor="ne", relx=0.15, rely=0.05)
 
-        absentee_students = []
+        absentee_students = ['']
         for i in student_sql.fetch_all():
             absentee_students.append(f'{i[0]}. "{i[1]}"')
 
