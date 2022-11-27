@@ -1,6 +1,10 @@
 import sql_interface as si
 
-si.init()
+def fetch_student(id):
+    si.cursor.execute(f'select * from Student where Student_Id={id}')
+    s = si.cursor.fetchone()
+    return s
+
 def update(s):
     SID=s[0]
     SNAME=s[1]
@@ -22,4 +26,23 @@ def update(s):
         si.connection.commit()
         print(si.cursor.rowcount,"Record updated")
         
-si.cursor.exe
+def add_student(s):
+    SID=s[0]
+    SNAME=s[1]
+    CID=s[2]
+    GENDER=s[3]
+    ADD=s[4]
+    CONNO=s[5]
+    MID=s[6]
+    EMER=s[7]
+
+    student = fetch_student(SID)
+
+    if student != None:
+        print('Student already exists with the same admission number')
+        return "Exists"
+    
+    q="insert into Student values({},'{}',{},'{}','{}',{},'{}',{}".format(SID,SNAME,CID,GENDER,ADD,CONNO,MID,EMER)
+    si.cursor.execute(q)
+    return "Created"
+

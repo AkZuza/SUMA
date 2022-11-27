@@ -35,7 +35,7 @@ class App(tk.Tk):
             frame.grid(row = 0, column=0, sticky="nsew")
 
         # login page open karo
-        self.current_frame = DisplayStudentMarksPage
+        self.current_frame = CreateStudentPage
         self.show_frame(self.current_frame)
     
     # shows new frame
