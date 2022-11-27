@@ -5,6 +5,8 @@ import mysql.connector as mys
 connection = None
 cursor = None
 
+import course_sql
+
 def init():
     global cursor,connection
     connection = mys.connect(user="root", passwd="root", host="localhost")
@@ -31,7 +33,7 @@ def init():
 
     # create course table
     cursor.execute('''create table if not exists Course_Master(Course_ID int primary key, course_name varchar(20) not null)''')
-    cursor.execute('''create table if not exists Course_Details(Course_ID int not null, Subject varchar(15) not null)''')
+    cursor.execute('''create table if not exists Course_Details(Course_ID int not null, Subject varchar(30) not null)''')
     
     # create teacher table
     cursor.execute('''create table if not exists Teacher(Teacher_ID int primary key, teacher_name varchar(30) not null, password varchar(20), status varchar(10))''')

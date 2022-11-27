@@ -1,13 +1,18 @@
-import sql_interface as si
+import mysql.connector as mys
 
 def fetch_student(id):
-    si.cursor.execute(f'select * from Student where Student_Id={id}')
-    s = si.cursor.fetchone()
+    connection = mys.connect(user="root", passwd="root", host="localhost", database='SUMA')
+    cursor = connection.cursor()
+    cursor.execute(f'select * from Student where Student_Id={id}')
+    s= cursor.fetchone()
     return s
 
 def fetch_all():
-    si.cursor.execute(f'select * from Student')
-    s = si.cursor.fetchall()
+    connection = mys.connect(user="root", passwd="root", host="localhost", database='SUMA')
+    cursor = connection.cursor()
+
+    cursor.execute(f'select * from Student')
+    s = cursor.fetchall()
     return s
 
 def update(s):
@@ -19,17 +24,21 @@ def update(s):
     CONNO=s[5]
     MID=s[6]
     EMER=s[7]
+
+    connection = mys.connect(user="root", passwd="root", host="localhost", database='SUMA')
+    cursor = connection.cursor()
+
     q="select * from student where SID={}".format(SID)
-    si.cursor.execute(q)
-    data=si.cursor.fetchone()
+    cursor.execute(q)
+    data=cursor.fetchone()
     if data==None:
         print("record not found")
         return False
     else:
-        q="update student set Student_ID={},Student_Name='{}',Class_Id={},Gender='{}',Address='{}',Contact_No={},Email_Id='{}',Emergency={}".format(SID,SNAME,CID,GENDER,ADD,CONNO,MID,EMER)
-        si.cursor.execute(q)
-        si.connection.commit()
-        print(si.cursor.rowcount,"Record updated")
+        q="update student set Student_Name='{}',Class_Id={},Gender='{}',Address='{}',Contact_No={},Email_Id='{}',Emergency={} where Student_ID={} ".format(SNAME,CID,GENDER,ADD,CONNO,MID,EMER, SID)
+        cursor.execute(q)
+        connection.commit()
+        print(cursor.rowcount,"Record updated")
         
 def add_student(s):
     SID=s[0]
@@ -41,6 +50,9 @@ def add_student(s):
     MID=s[6]
     EMER=s[7]
 
+    connection = mys.connect(user="root", passwd="root", host="localhost", database='SUMA')
+    cursor = connection.cursor()
+
     student = fetch_student(SID)
 
     if student != None:
@@ -48,7 +60,7 @@ def add_student(s):
         return "Exists"
     
     q="insert into Student values({},'{}',{},'{}','{}',{},'{}',{})".format(SID,SNAME,CID,GENDER,ADD,CONNO,MID,EMER)
-    si.cursor.execute(q)
-    si.connection.commit()
+    cursor.execute(q)
+    connection.commit()
     return "Created"
 

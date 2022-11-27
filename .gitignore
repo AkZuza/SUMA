@@ -13,3 +13,5 @@ __pycache__/logger.cpython-311.pyc
 __pycache__/sql_interface.cpython-311.pyc
 __pycache__/student.cpython-311.pyc
 __pycache__/teacher.cpython-311.pyc
+__pycache__/*
+__pycache__

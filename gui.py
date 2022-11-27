@@ -1,12 +1,13 @@
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, ttk
 
 import sql_interface as si
 from admin import AdminPage
-from teacher import TeacherPage, CreateTeacherPage
-from student import CreateStudentPage
+from teacher import TeacherPage, CreateTeacherPage, EditTeacherPage
+from student import CreateStudentPage, EditStudentPage
 from absentee import AbsenteePage
-from marks import DisplayStudentMarksPage
+from sclass import CreateClassPage, EditClassPage
+from marks import AddStudentMarkPage
 from common import loginheadingfont
 
     
@@ -21,6 +22,10 @@ class App(tk.Tk):
 
         # initialize sql
         si.init()
+        self.logged_in = 0
+
+        s = ttk.Style()
+        s.theme_use('clam')
 
         self.frame_history = []
 
@@ -29,13 +34,14 @@ class App(tk.Tk):
 
         self.frames = {}
 
-        for F in (DisplayStudentMarksPage, AbsenteePage, LoginPage,AdminPage, TeacherPage, CreateStudentPage, CreateTeacherPage):
+        for F in (AddStudentMarkPage, AbsenteePage, LoginPage,AdminPage, TeacherPage, CreateStudentPage, CreateTeacherPage, EditTeacherPage
+            ,EditStudentPage, CreateClassPage, EditClassPage):
             frame = F(container, self)
             self.frames[F] = frame
             frame.grid(row = 0, column=0, sticky="nsew")
 
         # login page open karo
-        self.current_frame = CreateTeacherPage
+        self.current_frame = LoginPage
         self.show_frame(self.current_frame)
     
     # shows new frame
@@ -43,6 +49,11 @@ class App(tk.Tk):
         self.frame_history.append(self.current_frame)
         self.current_frame = cont
         frame = self.frames[cont]
+        if cont == AddStudentMarkPage:
+            frame.redraw()
+
+        if cont == TeacherPage:
+            frame.load_class()
         frame.tkraise()
 
     def back_frame(self):
@@ -114,7 +125,8 @@ class LoginPage(tk.Frame):
         if t_password == None or t_password != password:
             messagebox.showinfo(title="Login Error", message="The username\\password you've entered is incorrect")
             return "Fail"
-
+        import common
+        common.logged_in_user = username
            # yay teacher exist not admin phew
         cont.show_frame(TeacherPage)
 
